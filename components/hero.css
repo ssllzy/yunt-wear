@@ -1,0 +1,92 @@
+.yunt-hero {
+  position: relative;
+  height: 190svh;
+  min-height: 700px;
+  background: #171914;
+  isolation: isolate;
+}
+
+.yunt-hero-stage {
+  position: sticky;
+  top: var(--nav-height, 64px);
+  display: grid;
+  height: calc(100svh - var(--nav-height, 64px));
+  min-height: 360px;
+  overflow: hidden;
+  place-items: center;
+}
+
+.yunt-hero-backdrop,
+.yunt-hero-poster,
+.yunt-hero-video,
+.yunt-hero-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.yunt-hero-poster {
+  background: #4b5042 url("/media/steppe-poster.webp") center / cover no-repeat;
+}
+
+.yunt-hero-video {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+.yunt-hero-shade {
+  background: #090d08;
+  opacity: 0.18;
+}
+
+.yunt-hero-mark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: min(86vw, 1240px);
+  flex: none;
+  color: #fff;
+  pointer-events: none;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.yunt-hero-mark svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.yunt-hero-accessible-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .yunt-hero { height: 170svh; }
+  .yunt-hero-mark { width: 94vw; }
+  .yunt-hero-video { object-position: 54% center; }
+  .yunt-hero-poster { background-position: 54% center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yunt-hero {
+    height: calc(100svh - var(--nav-height, 64px));
+    min-height: 360px;
+  }
+  .yunt-hero-stage { position: relative; top: 0; }
+  .yunt-hero-video { visibility: hidden; }
+  .yunt-hero-mark { will-change: auto; }
+}

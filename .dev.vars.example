@@ -1,0 +1,4 @@
+# Copy to .dev.vars and set your own values. Never commit .dev.vars.
+YUNT_ADMIN_PASSWORD_HASH=
+YUNT_SESSION_SECRET=
+YUNT_PUBLIC_ORIGIN=http://localhost:5173

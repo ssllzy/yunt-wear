@@ -1,0 +1,14 @@
+import { readFileSync, writeFileSync } from "node:fs";
+const [databaseId, origin, bucket = "yunt-wear-media"] = process.argv.slice(2);
+if (!/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(databaseId ?? "")) throw new Error("D1 database UUID required");
+const url = new URL(origin);
+if (url.protocol !== "https:" || url.origin !== origin) throw new Error("Public HTTPS origin required");
+const base = JSON.parse(readFileSync("dist/server/wrangler.json", "utf8"));
+if (!base.triggers?.crons?.length) throw new Error("Run the Cloudflare build first");
+base.name = "yunt";
+base.topLevelName = base.name;
+base.workers_dev = true;
+base.vars = { ...base.vars, YUNT_PUBLIC_ORIGIN: url.origin, YUNT_D1_VOTE_TOTALS: "1" };
+base.d1_databases = [{ binding: "DB", database_name: "yunt-wear", database_id: databaseId }];
+base.r2_buckets = [{ binding: "BUCKET", bucket_name: bucket }];
+writeFileSync("dist/server/wrangler.public.json", JSON.stringify(base, null, 2));

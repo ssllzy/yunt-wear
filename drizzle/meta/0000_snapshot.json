@@ -1,0 +1,55 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "a6e43b7c-873d-4fa1-9a23-517bac043915",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "design_votes": {
+      "name": "design_votes",
+      "columns": {
+        "voter_key": {
+          "name": "voter_key",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "design_id": {
+          "name": "design_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "design_votes_design_idx": {
+          "name": "design_votes_design_idx",
+          "columns": [
+            "design_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "design_votes_known_design": {
+          "name": "design_votes_known_design",
+          "value": "\"design_votes\".\"design_id\" IN ('design-01', 'design-02', 'design-03', 'design-04', 'design-05')"
+        }
+      }
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}
